@@ -7,6 +7,7 @@ A comprehensive framework for testing smart contract security patches against re
 2. An automated tool for evaluating security patches
 
 See our paper [Do Automated Fixes Truly Mitigate Smart Contract Exploits?](TODO).
+All results and tool reproduction details from the paper are located [here](https://github.com/ASSERT-KTH/RepairComp).
 
 ## 🎯 Project Structure
 
