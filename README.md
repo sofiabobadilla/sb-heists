@@ -1,10 +1,12 @@
-# HACK-LABS
+# sb-heists
 
 [![Test Suite](https://github.com/ASSERT-KTH/solidity-hack-labs/actions/workflows/ci.yml/badge.svg)](https://github.com/ASSERT-KTH/solidity-hack-labs/actions/workflows/ci.yml)
 
 A comprehensive framework for testing smart contract security patches against real-world exploits. This project provides:
 1. A reproducible dataset of smart contract exploits for SmartBugs-Curated dataset
 2. An automated tool for evaluating security patches
+
+See our paper [Do Automated Fixes Truly Mitigate Smart Contract Exploits?](TODO).
 
 ## 🎯 Project Structure
 
