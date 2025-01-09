@@ -6,8 +6,8 @@ A comprehensive framework for testing smart contract security patches against re
 1. A reproducible dataset of smart contract exploits for SmartBugs-Curated dataset
 2. An automated tool for evaluating security patches
 
-See our paper [Do Automated Fixes Truly Mitigate Smart Contract Exploits?](TODO).
-All results and tool reproduction details from the paper are located [here](https://github.com/ASSERT-KTH/RepairComp).
+See our paper [Do Automated Fixes Truly Mitigate Smart Contract Exploits?](https://arxiv.org/pdf/2501.04600).
+The paper's results and tool reproduction details are located [here](https://github.com/ASSERT-KTH/RepairComp).
 
 ## 🎯 Project Structure
 
