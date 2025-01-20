@@ -28,7 +28,7 @@ describe("attack unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e56
     return { contract, token, success_contract };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol", async function () {
+  it("functional check: unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
     const amount = ethers.parseEther("1");
     await expect(

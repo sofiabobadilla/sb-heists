@@ -23,7 +23,7 @@ describe("attack denial_of_service/auction.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: denial_of_service/auction.sol", async function () {
+  it("functional check: denial_of_service/auction.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a, b] = await ethers.getSigners();
     const amount = ethers.parseEther("1");

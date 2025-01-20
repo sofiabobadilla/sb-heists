@@ -26,7 +26,7 @@ describe("attack access_control/wallet_04_confused_sign.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/wallet_04_confused_sign.sol", async function () {
+  it("functional check: access_control/wallet_04_confused_sign.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
 

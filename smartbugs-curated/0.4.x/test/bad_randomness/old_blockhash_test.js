@@ -45,7 +45,7 @@ describe("attack bad_randomness/old_blockhash.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: bad_randomness/old_blockhash.sol", async function () {
+  it("functional check: bad_randomness/old_blockhash.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     const bytes = ethers.randomBytes(32);

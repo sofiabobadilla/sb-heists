@@ -26,7 +26,7 @@ describe("attack arithmetic/timeLock.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: arithmetic/timeLock.sol", async function () {
+  it("functional check: arithmetic/timeLock.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const { victim } = await loadFixture(deployContracts);
     await expect(victim.connect(a).deposit({ value: 1 })).to.not.be.reverted;

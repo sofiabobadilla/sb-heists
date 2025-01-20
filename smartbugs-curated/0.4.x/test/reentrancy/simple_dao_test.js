@@ -32,7 +32,7 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
     return { simpleDAO, maliciousContract };
   }
 
-  it("sanity check: reentrancy/simpleDAO.sol", async function () {
+  it("functional check: reentrancy/simpleDAO.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
     const { simpleDAO } = await loadFixture(deployContracts);

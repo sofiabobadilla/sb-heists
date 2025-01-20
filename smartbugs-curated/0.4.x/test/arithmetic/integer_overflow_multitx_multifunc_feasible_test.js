@@ -27,7 +27,7 @@ describe("attack arithmetic/integer_overflow_multitx_multifunc_feasible.sol", fu
     return { victim, attacker };
   }
 
-  it("sanity check: arithmetic/integer_overflow_multitx_multifunc_feasible.sol", async function () {
+  it("functional check: arithmetic/integer_overflow_multitx_multifunc_feasible.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     expect(await victim.count()).to.equal(1);

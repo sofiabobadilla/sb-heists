@@ -38,7 +38,7 @@ describe("attack unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7
     return { contract, revertContract, successPoC, successContract };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol", async function () {
+  it("functional check: unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol", async function () {
     const { successPoC, successContract } = await loadFixture(deployContracts);
     const [_, a] = await ethers.getSigners();
     const donatedValue = await ethers.provider.getStorage(successPoC.target, 8);

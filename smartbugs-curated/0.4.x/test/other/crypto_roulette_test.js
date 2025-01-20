@@ -21,7 +21,7 @@ describe("attack other/crypto_roulette.sol", function () {
     return { victim };
   }
 
-  it("sanity check: other/crypto_roulette.sol", async function () {
+  it("functional check: other/crypto_roulette.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(

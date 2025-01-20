@@ -15,7 +15,7 @@
       "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at BecToken.batchTransfer (contracts/dataset/arithmetic/BECToken.sol:264)\n    at BecTokenAttacker.attack (contracts/arithmetic/BECToken_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/BECToken_test.js:29:7)"
     },
     {
-      "title": "sanity check: arithmetic/integer_overflow_1.sol",
+      "title": "functional check: arithmetic/integer_overflow_1.sol",
       "file": "arithmetic/integer_overflow_1_test.js",
       "contractFile": "arithmetic/integer_overflow_1.sol",
       "state": "passed"
@@ -37,7 +37,7 @@
       "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowAdd.run (contracts/dataset/arithmetic/integer_overflow_add.sol:17)\n    at IntegerOverflowAddAttacker.attack (contracts/arithmetic/integer_overflow_add_attack.sol:17)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_add_test.js:25:7)"
     },
     {
-      "title": "sanity check: arithmetic/integer_overflow_mapping_sym_1.sol",
+      "title": "functional check: arithmetic/integer_overflow_mapping_sym_1.sol",
       "file": "arithmetic/integer_overflow_mapping_sym_1.js",
       "contractFile": "arithmetic/integer_overflow_mapping_sym_1.js",
       "state": "passed"

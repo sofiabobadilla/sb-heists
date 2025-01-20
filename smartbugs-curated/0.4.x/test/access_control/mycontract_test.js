@@ -42,7 +42,7 @@ describe("attack access_control/mycontract.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/mycontract.sol", async function () {
+  it("functional check: access_control/mycontract.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     await expect(victim.connect(victim_sig).sendTo(victim_sig.address, 1)).to
       .not.be.reverted;

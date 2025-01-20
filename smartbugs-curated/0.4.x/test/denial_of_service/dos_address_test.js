@@ -17,7 +17,7 @@ describe("attack denial_of_service/dos_address.sol", function () {
     return { victim };
   }
 
-  it("sanity check: denial_of_service/dos_address.sol", async function () {
+  it("functional check: denial_of_service/dos_address.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     expect(await victim.connect(a).iWin()).to.be.false;

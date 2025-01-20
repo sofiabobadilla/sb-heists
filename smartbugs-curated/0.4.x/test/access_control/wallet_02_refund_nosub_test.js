@@ -23,7 +23,7 @@ describe("attack access_control/wallet_02_refund_nosub.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/wallet_02_refund_nosub.sol", async function () {
+  it("functional check: access_control/wallet_02_refund_nosub.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1.0");

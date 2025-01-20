@@ -29,7 +29,7 @@ describe("attack arithmetic/tokensalechallenge.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: arithmetic/tokensalechallenge.sol", async function () {
+  it("functional check: arithmetic/tokensalechallenge.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(victim.connect(a).buy(1, { value: ethers.parseEther("1") })).to

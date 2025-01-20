@@ -26,7 +26,7 @@ describe("attack access_control/incorrect_constructor_name3.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/incorrect_constructor_name3.sol", async function () {
+  it("functional check: access_control/incorrect_constructor_name3.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(a.sendTransaction({ to: victim.target, value: 1 })).to.not.be

@@ -111,7 +111,7 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
     };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol in function withdrawAuctionBalances()", async function () {
+  it("functional check: unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol in function withdrawAuctionBalances()", async function () {
     const { contract, saleAuctionSuccess, siringAuction } =
       await loadFixture(deployContracts);
     await expect(
@@ -141,7 +141,7 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
     );
   });
 
-  it("sanity check: unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol in function giveBirth()", async function () {
+  it("functional check: unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol in function giveBirth()", async function () {
     const { pandaCallerSuccess, contract, saleAuction, siringAuction } =
       await loadFixture(deployContracts);
     await contract.connect(owner).setCFO(pandaCallerSuccess.target);

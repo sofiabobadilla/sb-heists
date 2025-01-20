@@ -24,7 +24,7 @@ describe("attack access_control/arbitrary_location_write_simple.sol", function (
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/arbitrary_location_write_simple.sol", async function () {
+  it("functional check: access_control/arbitrary_location_write_simple.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(victim.connect(a).PushBonusCode(1)).to.not.be.reverted;
