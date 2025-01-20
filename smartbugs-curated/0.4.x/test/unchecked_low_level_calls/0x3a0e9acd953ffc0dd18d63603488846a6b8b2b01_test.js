@@ -28,7 +28,7 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
     return { contract, revertContract, token };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol", async function () {
+  it("functional check: unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol", async function () {
     const { contract, token } = await loadFixture(deployContracts);
     const ownerBalance = await token.balanceOf(owner.address);
     const amount = ethers.parseEther("2");

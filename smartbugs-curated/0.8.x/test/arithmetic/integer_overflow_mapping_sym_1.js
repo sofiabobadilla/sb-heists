@@ -13,7 +13,7 @@ describe('attack arithmetic/integer_overflow_mapping_sym_1.sol', function () {
       return {overflow};
     }
 
-    it('sanity check: arithmetic/integer_overflow_mapping_sym_1.sol', async function () {
+    it('functional check: arithmetic/integer_overflow_mapping_sym_1.sol', async function () {
         const {overflow} = await loadFixture(deployContracts);
         const mappingSlot = BigInt(0); // map is at slot 0
         const key = BigInt(0); // We want to find map[0]

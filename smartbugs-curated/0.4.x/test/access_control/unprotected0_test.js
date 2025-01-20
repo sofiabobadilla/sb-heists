@@ -28,7 +28,7 @@ describe("attack access_control/unprotected0.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/unprotected0.sol", async function () {
+  it("functional check: access_control/unprotected0.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(victim.connect(owner).changeOwner(a)).to.not.be.reverted;

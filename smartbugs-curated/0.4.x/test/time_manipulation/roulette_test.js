@@ -23,7 +23,7 @@ describe("attack time_manipulation/roulette.sol", function () {
     return { victim };
   }
 
-  it("sanity check: time_manipulation/roulette.sol", async function () {
+  it("functional check: time_manipulation/roulette.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     await expect(
       sig1.sendTransaction({

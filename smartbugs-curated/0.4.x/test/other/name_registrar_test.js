@@ -26,7 +26,7 @@ describe("attack other/name_registrar.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: other/name_registrar.sol", async function () {
+  it("functional check: other/name_registrar.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const unlocked = await victim.unlocked();
     expect(unlocked).to.be.false;

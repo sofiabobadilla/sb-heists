@@ -28,7 +28,7 @@ describe("attack unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e0
     return { contract, revertContract, successContract };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol in WithdrawToken()", async function () {
+  it("functional check: unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol in WithdrawToken()", async function () {
     const { contract, successContract } = await loadFixture(deployContracts);
     await expect(contract.connect(owner).initTokenBank()).to.not.be.reverted;
     const amount = ethers.parseEther("2");

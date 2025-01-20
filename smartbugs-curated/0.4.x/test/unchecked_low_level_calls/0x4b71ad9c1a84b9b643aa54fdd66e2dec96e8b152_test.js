@@ -28,7 +28,7 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
     return { contract, token, success_contract };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol", async function () {
+  it("functional check: unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
     await expect(
       contract

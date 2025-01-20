@@ -34,7 +34,7 @@ describe("Reentrancy Attack for modifier_reentrancy.sol", function () {
     hacker = await MaliciousContract.deploy(victim.target);
   });
 
-  it("sanity check: reentrancy/modifier_reentrancy.sol", async function () {
+  it("functional check: reentrancy/modifier_reentrancy.sol", async function () {
     const [v, a] = await ethers.getSigners();
     await expect(contract.connect(a).airDrop()).to.not.be.reverted;
     expect(await victim.tokenBalance(contract.target)).to.equal("20");

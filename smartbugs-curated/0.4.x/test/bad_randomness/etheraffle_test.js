@@ -26,7 +26,7 @@ describe("attack bad_randomness/etheraffle.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: bad_randomness/etheraffle.sol", async function () {
+  it("functional check: bad_randomness/etheraffle.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(

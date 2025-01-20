@@ -17,7 +17,7 @@ describe("attack front_running/ERC20.sol", function () {
     return { victim };
   }
 
-  it("sanity check: front_running/ERC20.sol", async function () {
+  it("functional check: front_running/ERC20.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     await expect(victim.connect(owner).approve(attacker.address, 100)).to.not.be
       .reverted;

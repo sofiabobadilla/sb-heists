@@ -53,7 +53,7 @@ class CustomReporter extends Spec {
         error: err.message,
         stack: err.stack,
       };
-      if (test.title.includes("sanity check")) {
+      if (test.title.includes("functional check")) {
         failedSanity += 1;
         failedSanityTests.push(result);
       } else {
@@ -71,7 +71,7 @@ class CustomReporter extends Spec {
         contractFile: contractFile,
         state: test.state,
       };
-      if (test.title.includes("sanity check")) {
+      if (test.title.includes("functional check")) {
         passedSanity += 1;
       } else {
         passedResults.push(result);
@@ -101,7 +101,7 @@ class CustomReporter extends Spec {
       );
       const formattedMessage3 = Base.color(
         "fail",
-        `Total failed sanity tests: ${failedSanity}/${allFiles}`,
+        `Total failed functional tests: ${failedSanity}/${allFiles}`,
       );
       // // Log the formatted message
       console.log(`${formattedMessage}`);

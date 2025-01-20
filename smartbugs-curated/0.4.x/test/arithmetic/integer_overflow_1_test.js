@@ -24,7 +24,7 @@ describe("attack arithmetic/integer_overflow_1.sol", function () {
     return { overflow, attacker };
   }
 
-  it("sanity check: arithmetic/integer_overflow_1.sol", async function () {
+  it("functional check: arithmetic/integer_overflow_1.sol", async function () {
     const { overflow } = await loadFixture(deployContracts);
     let storage = await ethers.provider.getStorage(overflow.target, 0);
     let value = Number(storage);

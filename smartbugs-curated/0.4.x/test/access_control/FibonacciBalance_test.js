@@ -49,7 +49,7 @@ describe("attack access_control/FibonacciBalance.sol", function () {
     return { lib, victim, attacker };
   }
 
-  it("sanity check: access_control/FibonacciBalance.sol", async function () {
+  it("functional check: access_control/FibonacciBalance.sol", async function () {
     const [v] = await ethers.getSigners();
     const { lib, victim } = await loadFixture(deployContracts);
     const fibonacciLibrary = await victim.fibonacciLibrary();

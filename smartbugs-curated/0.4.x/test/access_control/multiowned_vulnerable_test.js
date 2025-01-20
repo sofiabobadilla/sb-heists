@@ -28,7 +28,7 @@ describe("attack access_control/multiowned_vulnerable.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/multiowned_vulnerable.sol", async function () {
+  it("functional check: access_control/multiowned_vulnerable.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a, b] = await ethers.getSigners();
     await expect(victim.connect(owner).newOwner(a.address)).to.not.be.reverted;

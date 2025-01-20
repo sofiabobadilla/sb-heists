@@ -45,7 +45,7 @@ describe("attack bad_randomness/guess_the_random_number.sol", function () {
     return { block, victim, attacker };
   }
 
-  it("sanity check: bad_randomness/guess_the_random_number.sol", async function () {
+  it("functional check: bad_randomness/guess_the_random_number.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(victim.connect(a).guess(42, { value: ethers.parseEther("1") }))

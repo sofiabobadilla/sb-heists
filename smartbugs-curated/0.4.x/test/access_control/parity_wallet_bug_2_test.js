@@ -28,7 +28,7 @@ describe("attack access_control/parity_wallet_bug_2.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: access_control/parity_wallet_bug_2.sol", async function () {
+  it("functional check: access_control/parity_wallet_bug_2.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     await expect(victim.connect(owner).initWallet([owner.address], 1, 1)).to.not

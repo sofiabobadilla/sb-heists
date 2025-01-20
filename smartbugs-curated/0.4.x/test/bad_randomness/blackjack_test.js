@@ -38,7 +38,7 @@ describe("attack bad_randomness/blackjack.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: bad_randomness/blackjack.sol", async function () {
+  it("functional check: bad_randomness/blackjack.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     expect(await ethers.provider.getBalance(victim.target)).to.equal(

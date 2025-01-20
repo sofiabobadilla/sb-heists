@@ -29,7 +29,7 @@ describe("Reentrancy Attack for reentrancy_dao.sol", function () {
     hacker = await MaliciousContract.deploy(victim.target);
   });
 
-  it("sanity check: reentrancy/reentrancy_dao.sol", async function () {
+  it("functional check: reentrancy/reentrancy_dao.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
     await expect(victim.connect(a).deposit({ value: amount })).to.not.be

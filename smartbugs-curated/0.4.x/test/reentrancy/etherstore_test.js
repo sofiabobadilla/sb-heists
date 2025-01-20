@@ -31,7 +31,7 @@ describe("Reentrancy Attack for etherstore.sol", function () {
     hacker = await MaliciousContract.deploy(victim.target);
   });
 
-  it("sanity check: reentrancy/etherstore.sol", async function () {
+  it("functional check: reentrancy/etherstore.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
     await expect(victim.connect(a).depositFunds({ value: amount })).to.not.be

@@ -28,7 +28,7 @@ describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function
     return { contract, caller, successCaller };
   }
 
-  it("sanity check: unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol in line 180", async function () {
+  it("functional check: unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol in line 180", async function () {
     const { contract, successCaller } = await loadFixture(deployContracts);
     const SGX_ADDRESS = "0x18513702cCd928F2A3eb63d900aDf03c9cc81593";
     await network.provider.request({
@@ -74,7 +74,7 @@ describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function
     expect(fee[1]).to.be.equal(0);
   });
 
-  it("sanity check: unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol in line 192", async function () {
+  it("functional check: unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol in line 192", async function () {
     const { contract, successCaller } = await loadFixture(deployContracts);
     const SGX_ADDRESS = "0x18513702cCd928F2A3eb63d900aDf03c9cc81593";
     await network.provider.request({

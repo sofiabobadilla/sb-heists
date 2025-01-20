@@ -28,7 +28,7 @@ describe("attack arithmetic/token.sol", function () {
     return { victim, attacker };
   }
 
-  it("sanity check: arithmetic/token.sol", async function () {
+  it("functional check: arithmetic/token.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
     expect(await victim.balanceOf(owner.address)).to.equal(1);

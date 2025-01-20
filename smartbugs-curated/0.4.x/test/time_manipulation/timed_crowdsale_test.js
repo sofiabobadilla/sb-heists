@@ -23,7 +23,7 @@ describe("attack time_manipulation/timed_crowdsale.sol", function () {
     return { victim };
   }
 
-  it("sanity check: time_manipulation/timed_crowdsale.sol", async function () {
+  it("functional check: time_manipulation/timed_crowdsale.sol", async function () {
     await hre.network.provider.send("hardhat_reset");
     const { victim } = await deployContracts();
     const [v, a] = await ethers.getSigners();
