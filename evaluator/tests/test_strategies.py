@@ -91,8 +91,7 @@ class TestBytecodePatchStrategy:
         }
         mock_file_manager.write_file.assert_called_once_with(
             bytecode_strategy.contract_path(patch),
-            json.dumps(expected_data, indent=4),
-            absolute=True
+            json.dumps(expected_data, indent=4)
         )
 
     @patch('os.path.exists')
