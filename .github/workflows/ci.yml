@@ -22,7 +22,7 @@ jobs:
       run: |
         cd smartbugs-curated/0.4.x
         npx hardhat test
-test-evaluator:
+  test-evaluator:
     name: Evaluator Tests
     runs-on: ubuntu-latest
     steps:
