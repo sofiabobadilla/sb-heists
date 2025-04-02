@@ -11,8 +11,6 @@ contract IntegerOverflowMinimalAttacker {
 
     function attack() public {
         uint256 count = victimContract.count();
-
-        victimContract.run(count);
         victimContract.run(1);
     }
 }
