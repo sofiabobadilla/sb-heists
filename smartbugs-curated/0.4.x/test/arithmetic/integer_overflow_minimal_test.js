@@ -29,7 +29,9 @@ describe("attack arithmetic/integer_overflow_minimal.sol", function () {
   it("functional check: arithmetic/integer_overflow_benign_1.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     const [v, a] = await ethers.getSigners();
+    // oracle: initial value is 1 for count
     expect(await victim.count()).to.equal(1);
+    // oracle: run(0) will increase count by 1
     await victim.connect(a).run(0);
     expect(await victim.count()).to.equal(1);
   });
