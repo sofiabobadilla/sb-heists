@@ -41,14 +41,21 @@ describe("Reentrancy Attack for 0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol",
   it("functional check: reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("10");
+    //Verify Put on original contract works as expected
     await expect(victim.connect(a).Put(0, { value: amount })).to.not.be
       .reverted;
+    //oracle: victim contract should have the amount deposited
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+
     const balanceBefore = await ethers.provider.getBalance(a.address);
+
+    //Verify Collect on original contract works as expected 
     const tx = await victim.connect(a).Collect(amount);
     const receipt = await tx.wait();
     const gasFee = receipt.gasUsed * receipt.gasPrice;
+    //oracle: victim contract should have 0 balance
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    //oracle: account a should have the balance before the transaction minus the gas fee
     expect(await ethers.provider.getBalance(a.address)).to.equal(
       balanceBefore + amount - gasFee,
     );
