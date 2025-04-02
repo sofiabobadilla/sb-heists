@@ -20,8 +20,10 @@ class HardhatTestRunner:
         self.hardhat_path = 'npx hardhat'
         self.compile()
     def get_test_file(self, contract_path: str) -> str:
+        print("contract_path", contract_path)
+        test_path=contract_path.replace("contracts/dataset", "test")
         """Get the test file for a specific contract"""
-        return os.path.join("test", contract_path.replace(".sol", "_test.js"))
+        return test_path.replace(".sol", "_test.js")
 
     def _run_command(self, command: str) -> subprocess.CompletedProcess:
         """Helper method to run shell commands"""
