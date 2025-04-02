@@ -30,6 +30,7 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
 
   it("functional check: unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
+    // Verify transfer function works as expected  (same argument, it is not corrupted)
     await expect(
       contract
         .connect(sig)
@@ -45,7 +46,7 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
 
   it("exploit unchecked low level call vulnerability", async function () {
     const { contract, token } = await loadFixture(deployContracts);
-
+    
     const amount = await token.balanceOf(owner.address);
     expect(amount).to.be.equal(1000000000000000000n);
     expect(await token.balanceOf(contract.target)).to.be.equal(0);
@@ -62,12 +63,15 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
 
     const val = 10;
 
-    // it does not revert cause the return value o all is not checked
+    // it does not revert cause the return value of all addresses is not checked
     await expect(contract.transfer(from, token.target, to, val)).not.be
       .reverted;
     // the second transfer does not happen
+    //owner balance is decreased by 10
     expect(await token.balanceOf(owner)).to.be.equal(amount - BigInt(val));
+    //contract balance is increased by 10 (first transfer happens)
     expect(await token.balanceOf(contract.target)).to.be.equal(10);
+    //sig balance is not increased (second transfer does not happen)
     expect(await token.balanceOf(sig.address)).to.be.equal(0);
   });
 });
