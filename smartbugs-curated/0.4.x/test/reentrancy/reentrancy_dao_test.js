@@ -31,15 +31,18 @@ describe("Reentrancy Attack for reentrancy_dao.sol", function () {
 
   it("functional check: reentrancy/reentrancy_dao.sol", async function () {
     const [v, a] = await ethers.getSigners();
+    //oracle: verify that deposit on ReentrancyDAO works as expected
     const amount = ethers.parseEther("1");
     await expect(victim.connect(a).deposit({ value: amount })).to.not.be
       .reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
     const balanceBefore = await ethers.provider.getBalance(a.address);
+    //oracle: verify that withdrawAll on ReentrancyDAO works as expected
     const tx = await victim.connect(a).withdrawAll();
     const receipt = await tx.wait();
     const gasFee = receipt.gasUsed * receipt.gasPrice;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    // Check if the balance of the attacker is updated correctly
     expect(await ethers.provider.getBalance(a.address)).to.equal(
       balanceBefore + amount - gasFee,
     );
