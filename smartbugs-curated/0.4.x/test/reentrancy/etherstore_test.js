@@ -34,10 +34,13 @@ describe("Reentrancy Attack for etherstore.sol", function () {
   it("functional check: reentrancy/etherstore.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
+    //oracle: verify that depositFunds on EtherStore works as expected
     await expect(victim.connect(a).depositFunds({ value: amount })).to.not.be
       .reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
     const balanceBefore = await ethers.provider.getBalance(a.address);
+
+    //oracle: verify that withdrawFunds on EtherStore works as expected
     const tx = await victim.connect(a).withdrawFunds(amount);
     const receipt = await tx.wait();
     const gasFee = receipt.gasUsed * receipt.gasPrice;
