@@ -31,9 +31,11 @@ describe("Reentrancy Attack for reentrancy_simple.sol", function () {
   it("functional check: reentrancy/reentrancy_simple.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
+    // oracle: check if deposit works for a benign case
     await expect(victim.connect(a).addToBalance({ value: amount })).to.not.be
       .reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    // oracle: check if withdrawBalance works for a benign case
     const balanceBefore = await ethers.provider.getBalance(a.address);
     const tx = await victim.connect(a).withdrawBalance();
     const receipt = await tx.wait();
@@ -75,10 +77,10 @@ describe("Reentrancy Attack for reentrancy_simple.sol", function () {
 
     // Verify the attack was successful
 
-    // victim has a drained account
+    // victim has less than the 5 from non-attacker deposit
     expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // 5 original balance + 2 from  initial deposit
+    // hacker has more than the 1 from deposit
     expect(hackerBalance).to.be.above(ethers.parseEther("1"));
   });
 });
