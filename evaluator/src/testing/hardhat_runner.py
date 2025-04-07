@@ -21,8 +21,9 @@ class HardhatTestRunner:
         self.compile()
     def get_test_file(self, contract_path: str) -> str:
         """Get the test file for a specific contract"""
-        test_path=contract_path.replace("contracts/dataset", "test")
-        return test_path.replace(".sol", "_test.js")
+        contract_dir, contract_name = os.path.split(contract_path)
+        test_name = contract_name.replace(".sol", "_test.js")
+        return os.path.join("test", os.path.basename(contract_dir), test_name)
 
     def _run_command(self, command: str) -> subprocess.CompletedProcess:
         """Helper method to run shell commands"""
