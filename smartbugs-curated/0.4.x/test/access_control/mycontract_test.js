@@ -43,16 +43,24 @@ describe("attack access_control/mycontract.sol", function () {
   }
 
   it("functional check: access_control/mycontract.sol", async function () {
-    const { victim } = await loadFixture(deployContracts);
+    const { victim, attacker } = await loadFixture(deployContracts);
+
+
+    //oracle: check that the function sendTo can be called by the owner
     await expect(victim.connect(victim_sig).sendTo(victim_sig.address, 1)).to
       .not.be.reverted;
+
+    // oracle: check that sendTo will revert if directly called by the attacker
+    await expect(
+      victim.connect(attacker_sig).sendTo(attacker_sig.address, 1),
+    ).to.be.reverted;
   });
 
   it("exploit access control vulnerability", async function () {
     const { victim, attacker } = await loadFixture(deployContracts);
     const victim_addr = await victim.getAddress();
     const attacker_addr = await attacker.getAddress();
-
+    
     const receiverBalance = await ethers.provider.getBalance(victim_addr);
     expect(receiverBalance).to.equal(ethers.parseEther("1.0"));
 
@@ -60,6 +68,9 @@ describe("attack access_control/mycontract.sol", function () {
       attacker_sig.address,
     );
     const smallAmount = ethers.parseUnits("1", "wei");
+    //oracle: check that the function sendTo can be called by the attacker.
+    // the phishing start from a transaction, the malicious contract operates trough the fallback function.
+
     await victim_sig.sendTransaction({
       to: attacker_addr,
       value: smallAmount,
