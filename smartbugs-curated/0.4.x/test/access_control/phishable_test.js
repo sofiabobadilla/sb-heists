@@ -41,6 +41,8 @@ describe("attack access_control/phishable.sol", function () {
       value: amount,
     });
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+
+    // oracle: check if withdrawAll works for a benign case
     const balanceBefore = await ethers.provider.getBalance(victim_sig.address);
     const tx = await victim.withdrawAll(victim_sig.address);
     const receipt = await tx.wait();
@@ -49,6 +51,13 @@ describe("attack access_control/phishable.sol", function () {
     expect(await ethers.provider.getBalance(victim_sig.address)).to.equal(
       balanceBefore + amount - gasFee,
     );
+
+    // oracle: check that withdrawAll will revert if directly called by the attacker
+    await expect(
+      victim.connect(attacker_sig).withdrawAll(attacker_sig.address),
+    ).to.be.reverted;
+
+
   });
 
   it("exploit access control vulnerability", async function () {
@@ -61,6 +70,7 @@ describe("attack access_control/phishable.sol", function () {
       value: amount,
     });
 
+
     const victimBalanceBefore = await ethers.provider.getBalance(victim_addr);
     const attackerBalanceBefore = await ethers.provider.getBalance(
       attacker_sig.address,
@@ -70,6 +80,7 @@ describe("attack access_control/phishable.sol", function () {
 
     const small_amount = ethers.parseUnits("1", "wei");
 
+    // oracle: the victim falls into a phishing transaction. The fallback of attacker runs a withdrawAll
     await victim_sig.sendTransaction({
       to: attacker_addr,
       value: small_amount,
@@ -81,9 +92,11 @@ describe("attack access_control/phishable.sol", function () {
     const attackerBalanceAfter = await ethers.provider.getBalance(
       attacker_sig.address,
     );
+    // not sure about this check
     expect(attackerBalanceAfter - attackerBalanceBefore).to.not.equal(
       small_amount,
     );
+    // attacker should have gotten the victim's funds
     expect(attackerBalanceAfter - attackerBalanceBefore).to.equal(amount);
   });
 });
