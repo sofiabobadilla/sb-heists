@@ -31,11 +31,15 @@ describe("Reentrancy Attack for reentrance.sol", function () {
   it("functional check: reentrancy/reentrance.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("1");
+    //oracle: verify balanceOf can be called and returns 0 right after deploy
     expect(await victim.balanceOf(a.address)).to.equal(0);
+
+    // oracle: verify donate can be called
     await expect(victim.connect(a).donate(a.address, { value: amount })).to.not
       .be.reverted;
     expect(await victim.balanceOf(a.address)).to.equal(amount);
     const balanceBefore = await ethers.provider.getBalance(a.address);
+    // oracle: verify withdraw can be called
     const tx = await victim.connect(a).withdraw(amount);
     const receipt = await tx.wait();
     const gasFee = receipt.gasUsed * receipt.gasPrice;
@@ -76,10 +80,11 @@ describe("Reentrancy Attack for reentrance.sol", function () {
 
     // Verify the attack was successful
 
-    // victim has lost more funds than the withdrawal
-    expect(victimBalance).to.be.below(ethers.parseEther("8"));
+    // victim has lost more funds than the hacker balance
+    expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // hacker has more than the withdrawal
-    expect(hackerBalance).to.be.above(ethers.parseEther("1"));
+    // hacker has more than the deposit amount
+    expect(hackerBalance).to.be.above(ethers.parseEther("4"));
+
   });
 });
