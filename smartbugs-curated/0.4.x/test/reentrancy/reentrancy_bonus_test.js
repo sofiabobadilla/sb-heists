@@ -33,6 +33,8 @@ describe("Reentrancy Attack for reentrancy_bonus.sol", function () {
     await network.provider.send("hardhat_setBalance", [victim.target, "0x64"]);
     const amount = 100;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+
+    // oracle: check if getFirstWithdrawalBonus works for a benign case
     const balanceBefore = await ethers.provider.getBalance(a.address);
     const tx = await victim.connect(a).getFirstWithdrawalBonus(a.address);
     const receipt = await tx.wait();
