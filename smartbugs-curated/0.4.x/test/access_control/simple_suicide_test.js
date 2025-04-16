@@ -30,6 +30,7 @@ describe("attack access_control/simple_suicide.sol", function () {
 
   it("functional check: access_control/simple_suicide.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    // owner should be able to suicide
     await expect(victim.connect(owner).sudicideAnyone(owner)).to.not.be
       .reverted;
   });
@@ -39,7 +40,9 @@ describe("attack access_control/simple_suicide.sol", function () {
     expect(
       await ethers.provider.getCode(await victim.getAddress()),
     ).not.to.equal("0x");
+    //oracle: external addres tries to suicideAnyone
     await attacker.attack();
+    //if correctly exploited, victim address equals 0x
     expect(await ethers.provider.getCode(await victim.getAddress())).to.equal(
       "0x",
     );
