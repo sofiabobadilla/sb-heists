@@ -43,14 +43,19 @@ describe("Reentrancy Attack for 0x8c7777c45481dba411450c228cb692ac3d550344.sol",
   it("functional check: reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol", async function () {
     const [v, a] = await ethers.getSigners();
     const amount = ethers.parseEther("10");
+    // oracle: check if Deposit works for a benign case
     await expect(victim.connect(a).Deposit({ value: amount })).to.not.be
       .reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    
+    // oracle: check if CashOut works for a benign case
     const balanceBefore = await ethers.provider.getBalance(a.address);
     const tx = await victim.connect(a).CashOut(amount);
     const receipt = await tx.wait();
     const gasFee = receipt.gasUsed * receipt.gasPrice;
+    // victim should have 0 balance
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    // a should have previous balance + amount - gasFee
     expect(await ethers.provider.getBalance(a.address)).to.equal(
       balanceBefore + amount - gasFee,
     );
@@ -88,7 +93,7 @@ describe("Reentrancy Attack for 0x8c7777c45481dba411450c228cb692ac3d550344.sol",
     );
 
     // Verify the attack was successful
-
+    // victim has lost more funds than the hacker balance (10-5=5)
     expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
     //hacker has more than the deposited amount
