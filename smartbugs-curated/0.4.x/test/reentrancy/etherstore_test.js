@@ -81,10 +81,10 @@ describe("Reentrancy Attack for etherstore.sol", function () {
 
     // Verify the attack was successful
 
-    // victim has lost more funds than the withdrawal
-    expect(victimBalance).to.be.below(ethers.parseEther("6"));
+    // victim has lost more funds than the hacker balance (7-2=5)
+    expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // hacker has more than the withdrawal
-    expect(hackerBalance).to.be.above(ethers.parseEther("1"));
+    // hacker has more than the hacker baance on victim
+    expect(hackerBalance).to.be.above(ethers.parseEther("2"));
   });
 });
