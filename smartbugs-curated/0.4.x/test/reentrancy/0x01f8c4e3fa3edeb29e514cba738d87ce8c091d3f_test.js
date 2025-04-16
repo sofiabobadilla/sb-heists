@@ -86,10 +86,10 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
     const personalBankBalance = await ethers.provider.getBalance(victim.target);
     const hackerBalance = await ethers.provider.getBalance(hacker.target);
 
-    // victim has lost more than the 2 ethers from withdraw
+    // victim has lost more than the 2 ethers  withdraw by the hacker
     expect(personalBankBalance).to.be.below(ethers.parseEther("5"));
 
-    //hacker has more than the withdrawn amount
+    //hacker has more than the deposit money
     expect(hackerBalance).to.be.above(ethers.parseEther("2"));
   });
 });
