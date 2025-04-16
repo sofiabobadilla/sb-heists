@@ -41,10 +41,13 @@ describe("Reentrancy Attack for 0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
 
   it("functional check: reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol", async function () {
     const [v, a] = await ethers.getSigners();
+
+    //oracle: verify that Deposit on ACCURAL_DEPOSIT works as expected
     const amount = ethers.parseEther("10");
     await expect(victim.connect(a).Deposit({ value: amount })).to.not.be
       .reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    //oracle: verify that CashOut on ACCURAL_DEPOSIT works as expected
     const balanceBefore = await ethers.provider.getBalance(a.address);
     const tx = await victim.connect(a).Collect(amount);
     const receipt = await tx.wait();
@@ -87,10 +90,10 @@ describe("Reentrancy Attack for 0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
     );
 
     // Verify the attack was successful
-
+    // victim has lost more funds than the hacker balance (10-5=5)
     expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // hacker has more than the deposited
+    // hacker has more than the deposited amount (5)
     expect(maliciousContractBalance).to.be.above(ethers.parseEther("5"));
   });
 });
