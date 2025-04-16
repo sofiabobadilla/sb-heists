@@ -30,6 +30,7 @@ describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e0450
 
   it("functional check: unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
+    //oracle: verify that transfer can be called, and it does not revert
     const amount = ethers.parseEther("1");
     await expect(
       contract
@@ -41,6 +42,7 @@ describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e0450
           amount,
         ),
     ).to.not.be.reverted;
+    //oracle: verify that transfer send the correct amount to the success contract
     expect(await success_contract.balanceOf(contract.target)).to.be.equal(
       amount,
     );
