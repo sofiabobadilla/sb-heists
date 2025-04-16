@@ -36,7 +36,9 @@ describe("Reentrancy Attack for modifier_reentrancy.sol", function () {
 
   it("functional check: reentrancy/modifier_reentrancy.sol", async function () {
     const [v, a] = await ethers.getSigners();
+    // oracle: check if deposit works for a benign case
     await expect(contract.connect(a).airDrop()).to.not.be.reverted;
+    // caller should only get 10 tokens
     expect(await victim.tokenBalance(contract.target)).to.equal("20");
   });
 
