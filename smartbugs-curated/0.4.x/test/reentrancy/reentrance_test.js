@@ -76,10 +76,10 @@ describe("Reentrancy Attack for reentrance.sol", function () {
 
     // Verify the attack was successful
 
-    // victim has lost more funds than the withdrawal
-    expect(victimBalance).to.be.below(ethers.parseEther("8"));
+    // victim has lost more funds than the hacker's balance (9-4=5)
+    expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // hacker has more than the withdrawal
-    expect(hackerBalance).to.be.above(ethers.parseEther("1"));
+    // hacker has more than the initial deposit of 4
+    expect(hackerBalance).to.be.above(ethers.parseEther("4"));
   });
 });
