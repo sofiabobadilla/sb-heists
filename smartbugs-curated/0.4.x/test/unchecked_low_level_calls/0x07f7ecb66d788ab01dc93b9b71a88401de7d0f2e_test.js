@@ -10,7 +10,7 @@ describe("attack unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7
     amount = ethers.parseEther("0.01");
     [owner] = await ethers.getSigners();
     const RevertContract = await ethers.getContractFactory(
-      "contracts/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol:Whale",
+      "contracts/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e_callee.sol:Whale",
     );
     const revertContract = await RevertContract.deploy();
 

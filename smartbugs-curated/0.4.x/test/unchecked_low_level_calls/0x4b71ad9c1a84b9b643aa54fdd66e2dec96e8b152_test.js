@@ -30,7 +30,7 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
 
   it("functional check: unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
-    // Verify transfer function works as expected  (same argument, it is not corrupted)
+    // Verify transfer function does not revert when called with valid parameters
     await expect(
       contract
         .connect(sig)
